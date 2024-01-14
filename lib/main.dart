@@ -1,4 +1,4 @@
-import 'package:fitness_ifood/pages/main_page.dart';
+import 'package:fitness_ifood/pages/main_page/main_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -8,17 +8,13 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xfffdfdfd),
-        ),
-        useMaterial3: true,
+        fontFamily: 'Poppins',
       ),
+      debugShowCheckedModeBanner: false, // Remove before deploy
       home: const MainPage(),
     );
   }
