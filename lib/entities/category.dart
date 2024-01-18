@@ -1,6 +1,6 @@
-import 'package:fitness_ifood/entities/base_card_item.dart';
+import 'package:fitness_ifood/entities/base_entity.dart';
 
-class Category extends BaseCardItem {
+class Category extends BaseEntity<Category> {
   Category({
     required super.title,
     required super.backgroundColor,

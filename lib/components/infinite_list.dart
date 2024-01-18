@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 class InfiniteList extends StatelessWidget {
   final List<Widget> collection;
-  final int width;
-  final int height;
+  final double? listWidth;
+  final double listHeight;
   final double xSpacing;
   final double ySpacing;
 
   const InfiniteList({
     super.key,
     required this.collection,
-    this.height = 100,
-    this.width = 100,
+    this.listHeight = 100,
+    this.listWidth,
     this.xSpacing = 10,
     this.ySpacing = 10,
   });
@@ -20,7 +20,8 @@ class InfiniteList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(left: 15),
-      height: 100,
+      width: listWidth,
+      height: listHeight,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         separatorBuilder: (context, index) {

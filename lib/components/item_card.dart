@@ -1,18 +1,62 @@
-import 'package:fitness_ifood/entities/base_card_item.dart';
+import 'package:fitness_ifood/entities/base_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ItemCard extends StatelessWidget {
-  final BaseCardItem item;
+  final BaseEntity item;
   final double height;
   final double width;
+  final bool showCircleBg;
 
-  const ItemCard({
+  final List<Widget> _displayedWidgets = [];
+
+  final List<Widget>? additionalChildren;
+
+  ItemCard({
     super.key,
     required this.item,
     this.width = 100,
     this.height = 100,
-  });
+    this.showCircleBg = true,
+    this.additionalChildren,
+  }) {
+    var image = showCircleBg
+        ? Container(
+            padding: const EdgeInsets.all(12),
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+            ),
+            child: SvgPicture.asset(item.iconPath),
+          )
+        : SvgPicture.asset(item.iconPath);
+
+    var text = item.subtitle == null
+        ? Text(item.title)
+        : Column(
+            children: [
+              Text(item.title),
+              Text(
+                item.subtitle!,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.black.withOpacity(.55),
+                ),
+              ),
+            ],
+          );
+
+    _displayedWidgets.addAll([
+      image,
+      text,
+    ]);
+
+    if (additionalChildren != null) {
+      _displayedWidgets.add(Column(
+        children: additionalChildren!,
+      ));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +70,7 @@ class ItemCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-            ),
-            child: SvgPicture.asset(item.iconPath),
-          ),
-          Text(item.title),
-        ],
+        children: _displayedWidgets,
       ),
     );
   }

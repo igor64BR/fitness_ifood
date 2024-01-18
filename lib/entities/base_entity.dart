@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class BaseCardItem {
+abstract class BaseEntity<T extends BaseEntity<T>> {
   // Counts the number of items already created. This helps to set unique ids
   //  for children entities
   static int _count = 0;
@@ -10,10 +10,12 @@ abstract class BaseCardItem {
   get id => _id;
 
   final String title;
+  final String? subtitle;
   final String iconPath;
   final Color backgroundColor;
 
-  BaseCardItem({
+  BaseEntity({
+    this.subtitle,
     required this.title,
     required this.iconPath,
     required this.backgroundColor,

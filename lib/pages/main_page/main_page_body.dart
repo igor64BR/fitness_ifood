@@ -9,15 +9,18 @@ class MainPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const AppSearchBar(),
-        _spacer,
-        Categories(),
-        _spacer,
-        Recommendations(),
-      ],
+    var bodyChildren = [
+      const AppSearchBar(),
+      _spacer,
+      Categories(),
+      _spacer,
+      Recommendations(),
+    ];
+
+    return ListView.separated(
+      itemBuilder: (_, index) => bodyChildren[index],
+      separatorBuilder: (context, index) => _spacer,
+      itemCount: bodyChildren.length,
     );
   }
 
